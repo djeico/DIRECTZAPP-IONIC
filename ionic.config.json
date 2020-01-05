@@ -1,6 +1,7 @@
 {
-  "name": "directwhatsapp",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {}
+  "name": "DirectZapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }

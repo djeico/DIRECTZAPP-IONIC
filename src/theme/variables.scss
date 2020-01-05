@@ -37,6 +37,8 @@ $colors: (
   primary:    #488aff,
   secondary:  #32db64,
   danger:     #f53d3d,
+  error:      #ee0303,
+  warning:    #df9a06,
   light:      #f4f4f4,
   dark:       #222
 );
@@ -54,7 +56,16 @@ $colors: (
 // Material Design only Sass variables can go here
 
 
+$text-input-highlight-color-valid: transparent;
+$text-input-highlight-color-invalid: #ee0303;
 
+$text-input-md-highlight-color: transparent;
+$text-input-md-highlight-color-valid: transparent;
+$text-input-md-highlight-color-invalid: #ee0303;
+
+$text-input-ios-highlight-color: transparent;
+$text-input-ios-highlight-color-valid: transparent;
+$text-input-ios-highlight-color-invalid: #ee0303;
 
 // App Windows Variables
 // --------------------------------------------------
