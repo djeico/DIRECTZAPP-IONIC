@@ -1,10 +1,10 @@
  tasks:
   - before: npm install ionic -g --save &&
-                npm install &&
-                npm audit fix &&
-                npm rebuild node-sass --force &&
-                npm update node-sass &&
-                npm install @ionic/app-scripts@latest --save-dev &&
-                npm i natives &&
-                ionic serve
-- init: npm run build
+            npm install &&
+            npm audit fix &&
+            npm rebuild node-sass --force &&
+            npm update node-sass &&
+            npm install @ionic/app-scripts@latest --save-dev &&
+            npm i natives &&
+            ionic serve
+  - init: npm run build
