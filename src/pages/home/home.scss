@@ -1,22 +1,22 @@
-page-teste {
+page-home {
+
     ion-content {
         background-image: url('../../assets/imgs/bg.jpg');
         -webkit-background-image: url('../../assets/imgs/bg.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         color: black !important;
-
         text-shadow: 0.5px 0.5px 0.5px #000;
+    }
 
-    }   
-    
     form {
         background-color: transparent !important;
     }
-    
+
     ion-item {
         background-color: transparent !important;
     }
+
     .form-error {
         font-size: 1.4rem;
         color: map-get($colors , error);
@@ -27,7 +27,7 @@ page-teste {
         font-size: 20px;
         //color: map-get($colors , dark );
     }
-    
+
     .text {
         color: map-get($colors , dark ) !important;
         font-weight: bold;
