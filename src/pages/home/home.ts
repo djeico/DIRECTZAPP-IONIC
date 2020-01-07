@@ -4,6 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { HomeRules } from '../../rules/home';
 import { BandeiraModel } from '../../model/bandeira';
+import { BandeiraRepository } from '../../repository/bandeira';
 
 @IonicPage()
 @Component({
@@ -15,9 +16,10 @@ export class HomePage {
   @ViewChild('_ddi') selectRef: Select;
   @ViewChild('_tel') inputTel;
   @ViewChild('_ddd') inputDDD;
+
   private selectOptions;
   private currencyList;
-  private model = { name: "Brasil", dial_code: "+55", code: "BR" };
+  private model:BandeiraModel;// = { name: "Brasil", dial_code: "+55", code: "BR" };
 
   private addUserForm: any;
   private ddd = null;
@@ -25,7 +27,8 @@ export class HomePage {
   private platform = null;
 
   constructor(public alertController: AlertController, private iab: InAppBrowser, platform: Platform, public navCtrl: NavController, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
-    this.currencyList = BandeiraModel.bandeiras();
+    this.currencyList = BandeiraRepository.getBandeiras();
+    this.model = this.currencyList[0];
     this.selectOptions = { cssClass: "course-popover" };
     this.platform = platform;
 

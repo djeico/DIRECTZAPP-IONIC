@@ -3,7 +3,7 @@ import { FormControl } from "@angular/forms";
 
 export class HomeRules {
 
-  public static isDDI(fone:FoneModel):Boolean {
+  public static isValidoDDI(fone:FoneModel):Boolean {
     return String(fone.getPais().getPais_Dial_Code).length > 0 &&
             String(fone.getPais().getPais_Dial_Code).length <= 4;
   }
