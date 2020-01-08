@@ -1,70 +1,46 @@
 <ion-content padding>
-    <form [formGroup]="addUserForm">
 
-      <ion-item class="hidden">
-        <ion-icon name="appname-br"></ion-icon>
-        <ion-select #_ddi (ionChange)="onChange($event)" >
-          <ion-option *ngFor="let flag of currencyList" [value]="flag.code">{{flag?.name}}</ion-option>
-        </ion-select>
-      </ion-item>
+	<form [formGroup]="destinatarioForm">
 
-      <ion-item (click)="openSelect()">
-        <ion-label class="text">DDI</ion-label>
-        <ion-label class="icon-text" *ngIf="model">
-          <ion-icon
-                    class="custom-ico-{{model.code | lowercase}}"
-                    range-left small item-start
-                    >
-          </ion-icon> {{model.code}} {{model.dial_code}}
-        </ion-label>
-      </ion-item>
+		<ion-item class="hidden">
+			<ion-icon name="appname-br"></ion-icon>
+			<ion-select #_ddi (ionChange)="onChange($event)">
+				<ion-option *ngFor="let flag of currencyList" [value]="flag.code">{{flag?.name}}</ion-option>
+			</ion-select>
+		</ion-item>
 
+		<ion-item (click)="openSelect()">
+			<ion-label class="text">DDI</ion-label>
+			<ion-label class="icon-text" *ngIf="model">
+				<ion-icon class="custom-ico-{{model.code | lowercase}}" range-left small item-start>
+				</ion-icon> {{model.code}} {{model.dial_code}}
+			</ion-label>
+		</ion-item>
 
-      <ion-item (click)="setFocusDDD()">
-        <ion-label class="text" stacked> DDD </ion-label>
-        <ion-input class="input"
-                  #_ddd
-                  maxlength = "2"
-                  [(ngModel)] = "ddd"
-                  formControlName = "ddd"
-                  name = "ddd"
-                  type = "tel"
-                  (ionChange) = 'onChangeDDD($event)'
-                  autocomplete = "off"
-                  clearInput >
-        </ion-input>
-      </ion-item>
+		<ion-item (click)="setFocusDDD()">
+			<ion-label class="text" stacked> DDD </ion-label>
+			<ion-input class="input" #_ddd maxlength="2" [(ngModel)]="ddd" formControlName="ddd" name="ddd" type="tel"
+				(ionChange)='onChangeDDD($event)' autocomplete="off" clearInput>
+			</ion-input>
+		</ion-item>
+		<div *ngIf="validaFormD() && ddd != null" class="form-error"> {{enums.ValidationEnum.DDD_WARNING}} </div>
 
-      <ion-item (click)="setFocusTel()" class="item">
-        <ion-label class="text" stacked>TELEFONE</ion-label>
-        <ion-input class="input"
-                  #_tel
-                  maxlength = "9"
-                  [(ngModel)] = "numero"
-                  formControlName = "numero"
-                  name = "numero"
-                  type = "tel"
-                  (ionChange) = 'onChangeNumero($event)'
-                  autocomplete = "off"
-                  clearInput >
-        </ion-input>
+		<ion-item (click)="setFocusTel()" class="item">
+			<ion-label class="text" stacked>TELEFONE</ion-label>
+			<ion-input class="input" #_tel maxlength="9" [(ngModel)]="numero" formControlName="numero" name="numero"
+				type="tel" (ionChange)='onChangeNumero($event)' autocomplete="off" clearInput>
+			</ion-input>
+		</ion-item>
+    <div *ngIf="validaFormN() && numero != null" class="form-error"> {{enums.ValidationEnum.FONE_WARNING}}</div>
 
-      </ion-item>
-    <ion-item no-lines>
-      <div *ngIf="validaFormD()" class="form-error"> DDD deve possuir 2 dígitos. </div>
-      <div *ngIf="validaFormN()" class="form-error"> TELEFONE deve possuir 9 dígitos. </div>
-    </ion-item>
-
-
-    <button (click)="dismiss()" class="btn" ion-button color="secondary" #add full ion-button icon-start [disabled]="!addUserForm.valid">
-      <ion-icon class="icon" ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon>
-      Conversar
+		<button (click)="dismiss()" class="btn" ion-button color="secondary" #add full ion-button icon-start [disabled]="!destinatarioForm.valid">
+      <ion-icon class="icon" ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon> {{enums.ElementsText.TEXT_TALK_BUTTON}}
     </button>
 
-    </form>
+	</form>
 
-    <ion-fab right bottom>
-      <button (click)="about()" ion-fab color="warning" mini><ion-icon ios="ios-bulb" md="md-bulb"></ion-icon></button>
-    </ion-fab>
+  <ion-fab right bottom>
+		<button (click)="about()" ion-fab color="warning" mini><ion-icon ios="ios-bulb" md="md-bulb"></ion-icon></button>
+	</ion-fab>
 
 </ion-content>

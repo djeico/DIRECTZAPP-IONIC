@@ -11,6 +11,7 @@ page-home {
 
     form {
         background-color: transparent !important;
+        margin-top: 40px !important;
     }
 
     ion-item {
@@ -21,6 +22,8 @@ page-home {
         font-size: 1.4rem;
         color: map-get($colors , error);
         text-shadow: 0px 0px 0px #000;
+        margin: 13px 8px 13px 0 !important;
+        text-align: end !important;
     }
 
     .icon {

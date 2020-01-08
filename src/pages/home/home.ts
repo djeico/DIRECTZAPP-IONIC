@@ -3,8 +3,8 @@ import { IonicPage, NavController, ViewController, Platform, AlertController, Se
 import { Validators, FormBuilder } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { HomeRules } from '../../rules/home';
-import { BandeiraModel } from '../../model/bandeira';
 import { BandeiraRepository } from '../../repository/bandeira';
+import * as Enums from '../../enumerable/enumerables';
 
 @IonicPage()
 @Component({
@@ -17,57 +17,48 @@ export class HomePage {
   @ViewChild('_tel') inputTel;
   @ViewChild('_ddd') inputDDD;
 
-  private selectOptions;
-  private currencyList;
-  private model:BandeiraModel;// = { name: "Brasil", dial_code: "+55", code: "BR" };
+  public platform = null;
+  public currencyList;
+  public model = { name: "Brasil", dial_code: "+55", code: "BR" };
+  public selectOptions;
 
-  private addUserForm: any;
-  private ddd = null;
-  private numero = null;
-  private platform = null;
+  public destinatarioForm: any;
+  public ddd = null;
+  public numero = null;
+  public enums = Enums;
 
-  constructor(public alertController: AlertController, private iab: InAppBrowser, platform: Platform, public navCtrl: NavController, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
+  constructor(public alertController: AlertController, private iaBrowser: InAppBrowser, platform: Platform, public navCtrl: NavController, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
+
     this.currencyList = BandeiraRepository.getBandeiras();
-    this.model = this.currencyList[0];
     this.selectOptions = { cssClass: "course-popover" };
     this.platform = platform;
 
-    this.addUserForm = this.formBuilder.group({
+    this.destinatarioForm = this.formBuilder.group({
       ddd: [this.ddd, Validators.compose([Validators.maxLength(2), Validators.minLength(2), Validators.required])],
       numero: [this.numero, Validators.compose([Validators.maxLength(9), Validators.minLength(9), Validators.required])],
     });
 
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     setTimeout(() => { this.inputDDD.setFocus(); }, 1000);
   }
 
-  async about(){
-    const alert = await this.alertController.create({
-      title: 'DirectZapp v.1.0.4',
-      message: 'DirectZapp é um aplicativo gratuito e sem propagandas.\n Desenvolvido por Jaquisson Nunes',
-      buttons: ['Fechar']
-    });
-
-    await alert.present();
-  }
-
-  dismiss(btn: boolean = true) {
-    let fone = null;
+  dismiss() {
+    let telefone = null;
     try {
-      fone = btn ? { ddi: this.model.dial_code.replace('+',''), ddd: this.ddd, numero: this.numero } : null;
-      this.goShareOne(fone);
+      telefone = { ddi: this.model.dial_code.replace('+', ''), ddd: this.ddd, numero: this.numero };
+      this.goShareOne(telefone);
     } catch (error) {
-      fone = null;
+      telefone = null;
     }
   }
 
-  setFocusTel(){
+  setFocusTel() {
     this.inputTel.setFocus();
   }
 
-  setFocusDDD(){
+  setFocusDDD() {
     this.inputDDD.setFocus();
   }
 
@@ -99,19 +90,19 @@ export class HomePage {
   }
 
   isDDD() {
-    return String(this.addUserForm.value.ddd).length == 2;
+    return String(this.destinatarioForm.value.ddd).length == 2;
   }
 
   isNumero() {
-    return String(this.addUserForm.value.numero).length == 9;
+    return String(this.destinatarioForm.value.numero).length == 9;
   }
 
   validaFormN() {
-    return String(this.addUserForm.value.numero).length != 9;
+    return String(this.destinatarioForm.value.numero).length != 9;
   }
 
   validaFormD() {
-    return String(this.addUserForm.value.ddd).length != 2;
+    return String(this.destinatarioForm.value.ddd).length != 2;
   }
 
   goShareOne(data) {
@@ -126,7 +117,7 @@ export class HomePage {
 
       //let url = `whatsapp://send?text=t`;
 
-      const browser = this.iab.create(url, _TARGET, {
+      const browser = this.iaBrowser.create(url, _TARGET, {
         location: "no",
         clearcache: "yes",
         clearsessioncache: "yes",
@@ -143,7 +134,6 @@ export class HomePage {
   }
 
   onChange($event) {
-    console.log($event);
     let indexes = this.currencyList.map(function (obj, index) {
       if (obj.code == $event) { return index; }
     }).filter(isFinite)
@@ -157,6 +147,16 @@ export class HomePage {
 
   exitApp() {
     this.platform.exitApp();
+  }
+
+  async about() {
+    const alert = await this.alertController.create({
+      title: this.enums.About.ABOUT_TITLE+' ['+this.enums.About.ABOUT_VERSION+']',
+      message: this.enums.About.ABOUT_MESSAGE,
+      buttons: [this.enums.ElementsText.TEXT_CLOSE_BUTTON]
+    });
+
+    await alert.present();
   }
 
 }

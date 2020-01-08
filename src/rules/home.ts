@@ -1,11 +1,10 @@
-import { FoneModel } from "../model/fone";
 import { FormControl } from "@angular/forms";
 
 export class HomeRules {
 
-  public static isValidoDDI(fone:FoneModel):Boolean {
-    return String(fone.getPais().getPais_Dial_Code).length > 0 &&
-            String(fone.getPais().getPais_Dial_Code).length <= 4;
+  public static isValidoDDI(fone:any):Boolean {
+    return String(fone.dial_code).length > 0 &&
+            String(fone.dial_code).length <= 4;
   }
 
   public static isValidoDDD(form: FormControl):Boolean {
