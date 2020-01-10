@@ -18,18 +18,20 @@ export class HomePage {
   @ViewChild('_ddd') inputDDD;
 
   public platform = null;
-  public currencyList;
+  public bandeiras;
   public model = { name: "Brasil", dial_code: "+55", code: "BR" };
   public selectOptions;
-
+  public regras = HomeRules;
   public destinatarioForm: any;
   public ddd = null;
   public numero = null;
   public enums = Enums;
 
+  public error = null;
+
   constructor(public alertController: AlertController, private iaBrowser: InAppBrowser, platform: Platform, public navCtrl: NavController, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
 
-    this.currencyList = BandeiraRepository.getBandeiras();
+    this.bandeiras = BandeiraRepository.getBandeiras();
     this.selectOptions = { cssClass: "course-popover" };
     this.platform = platform;
 
@@ -44,16 +46,6 @@ export class HomePage {
     setTimeout(() => { this.inputDDD.setFocus(); }, 1000);
   }
 
-  dismiss() {
-    let telefone = null;
-    try {
-      telefone = { ddi: this.model.dial_code.replace('+', ''), ddd: this.ddd, numero: this.numero };
-      this.goShareOne(telefone);
-    } catch (error) {
-      telefone = null;
-    }
-  }
-
   setFocusTel() {
     this.inputTel.setFocus();
   }
@@ -64,8 +56,7 @@ export class HomePage {
 
   onChangeDDD(event) {
     if (event.blur) {
-      this.validaFormD();
-      if (String(event.value).length == 2) {
+      if(this.regras.isValidoDDD(this.destinatarioForm)){
         let num = String(event.value).substring(0, 2);
         this.ddd = parseInt(num);
         this.setFocusTel();
@@ -76,33 +67,12 @@ export class HomePage {
 
   onChangeNumero(event) {
     if (event.blur) {
-      this.validaFormN();
-      if (String(event.value).length == 9) {
+      if (this.regras.isValidoNumero(this.destinatarioForm)) {
         let num = String(event.value).substring(0, 9);
         this.numero = parseInt(num);
         return false;
       }
     }
-  }
-
-  isDDI() {
-    return String(this.model.dial_code).length > 0 && String(this.model.dial_code).length <= 4;
-  }
-
-  isDDD() {
-    return String(this.destinatarioForm.value.ddd).length == 2;
-  }
-
-  isNumero() {
-    return String(this.destinatarioForm.value.numero).length == 9;
-  }
-
-  validaFormN() {
-    return String(this.destinatarioForm.value.numero).length != 9;
-  }
-
-  validaFormD() {
-    return String(this.destinatarioForm.value.ddd).length != 2;
   }
 
   goShareOne(data) {
@@ -113,9 +83,7 @@ export class HomePage {
 
     try {
       let text = encodeURI('');
-      let url = `https://wa.me/${fone}?text=${text}`;
-
-      //let url = `whatsapp://send?text=t`;
+      let url = `https://wa.me/${fone}?text=${text}`; /* outra forma de mmontar a url: `whatsapp://send?text=t`; */
 
       const browser = this.iaBrowser.create(url, _TARGET, {
         location: "no",
@@ -123,26 +91,45 @@ export class HomePage {
         clearsessioncache: "yes",
         toolbar: "no"
       });
+
       browser.on("loadstop").subscribe(event => {
         browser.executeScript({ code: "document.cookie;" }).then(cookie => {
           console.log("Cookie: ", cookie);
+          this.error += cookie;
         });
       });
+
     } catch (error) {
       console.log("goShare Error: ", error);
+      this.error += error;
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
     }
   }
 
-  onChange($event) {
-    let indexes = this.currencyList.map(function (obj, index) {
+  onChangeDDI($event) {
+    let indices = this.bandeiras.map(function (obj, index) {
       if (obj.code == $event) { return index; }
     }).filter(isFinite)
-    this.model = this.currencyList[indexes[0]];
-    console.log(this.model);
+    this.model = this.bandeiras[indices[0]];
   }
 
   openSelect() {
     this.selectRef.open();
+  }
+
+  dismiss() {
+    let telefone = null;
+    try {
+      telefone = { ddi: this.model.dial_code.replace('+', ''), ddd: this.ddd, numero: this.numero };
+      this.goShareOne(telefone);
+    } catch (error) {
+      telefone = null;
+    }
+  }
+
+  limparFormulario(){
+    this.ddd = this.numero = null;
+    setTimeout(() => { this.inputDDD.setFocus(); }, 500);
   }
 
   exitApp() {
@@ -155,7 +142,6 @@ export class HomePage {
       message: this.enums.About.ABOUT_MESSAGE,
       buttons: [this.enums.ElementsText.TEXT_CLOSE_BUTTON]
     });
-
     await alert.present();
   }
 

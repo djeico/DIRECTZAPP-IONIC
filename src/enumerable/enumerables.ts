@@ -1,5 +1,3 @@
-//import * as Enums from '../enumerable/enumerable';
-//public enumeradores = Enums;
 export enum ValidationEnum{
   DDD_INVALID = 'O DDD informado é inválido',
   DDD_WARNING = 'O DDD deve possuir 2 dígitos',
@@ -16,5 +14,6 @@ export enum About{
 export enum ElementsText{
   TEXT_CLOSE_BUTTON = 'Fechar',
   TEXT_CONFIRM_BUTTON = 'Confirmar',
+  TEXT_CLEAR_BUTTON = 'Limpar',
   TEXT_TALK_BUTTON = 'Conversar',
 }

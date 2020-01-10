@@ -4,8 +4,8 @@
 
 		<ion-item class="hidden">
 			<ion-icon name="appname-br"></ion-icon>
-			<ion-select #_ddi (ionChange)="onChange($event)">
-				<ion-option *ngFor="let flag of currencyList" [value]="flag.code">{{flag?.name}}</ion-option>
+			<ion-select #_ddi (ionChange)="onChangeDDI($event)">
+				<ion-option *ngFor="let flag of bandeiras" [value]="flag.code">{{flag?.name}}</ion-option>
 			</ion-select>
 		</ion-item>
 
@@ -23,7 +23,7 @@
 				(ionChange)='onChangeDDD($event)' autocomplete="off" clearInput>
 			</ion-input>
 		</ion-item>
-		<div *ngIf="validaFormD() && ddd != null" class="form-error"> {{enums.ValidationEnum.DDD_WARNING}} </div>
+		<div *ngIf="!regras.isValidoDDD(destinatarioForm) && ddd != null" class="form-error"> {{enums.ValidationEnum.DDD_WARNING}} </div>
 
 		<ion-item (click)="setFocusTel()" class="item">
 			<ion-label class="text" stacked>TELEFONE</ion-label>
@@ -31,11 +31,18 @@
 				type="tel" (ionChange)='onChangeNumero($event)' autocomplete="off" clearInput>
 			</ion-input>
 		</ion-item>
-    <div *ngIf="validaFormN() && numero != null" class="form-error"> {{enums.ValidationEnum.FONE_WARNING}}</div>
+    <div *ngIf="!regras.isValidoNumero(destinatarioForm) && numero != null" class="form-error"> {{enums.ValidationEnum.FONE_WARNING}}</div>
 
 		<button (click)="dismiss()" class="btn" ion-button color="secondary" #add full ion-button icon-start [disabled]="!destinatarioForm.valid">
       <ion-icon class="icon" ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon> {{enums.ElementsText.TEXT_TALK_BUTTON}}
     </button>
+
+		<button (click)="limparFormulario()" class="btn" ion-button color="warning" #del full ion-button icon-start>
+      <ion-icon class="icon" ios="ios-trash" md="md-trash"></ion-icon> {{enums.ElementsText.TEXT_CLEAR_BUTTON}}
+    </button>
+    <div>
+    <p>{{error}}</p>
+    </div>
 
 	</form>
 
