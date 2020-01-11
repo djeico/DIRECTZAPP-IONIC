@@ -4,6 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { HomeRules } from '../../rules/home';
 import { BandeiraRepository } from '../../repository/bandeira';
+import { BandeiraModel } from '../../model/bandeira';
 import * as Enums from '../../enumerable/enumerables';
 
 @IonicPage()
@@ -18,20 +19,20 @@ export class HomePage {
   @ViewChild('_ddd') inputDDD;
 
   public platform = null;
-  public bandeiras;
-  public model = { name: "Brasil", dial_code: "+55", code: "BR" };
+  public bandeiras: Array<BandeiraModel>;
+  public model: BandeiraModel = new BandeiraModel("Brasil", "+55", "BR");
   public selectOptions;
   public regras = HomeRules;
   public destinatarioForm: any;
-  public ddd = null;
-  public numero = null;
   public enums = Enums;
 
+  public ddd = null;
+  public numero = null;
   public error = null;
 
   constructor(public alertController: AlertController, private iaBrowser: InAppBrowser, platform: Platform, public navCtrl: NavController, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
 
-    this.bandeiras = BandeiraRepository.getBandeiras();
+    this.bandeiras = BandeiraRepository.getBandeiras() as Array<BandeiraModel>;
     this.selectOptions = { cssClass: "course-popover" };
     this.platform = platform;
 
@@ -94,7 +95,7 @@ export class HomePage {
 
       browser.on("loadstop").subscribe(event => {
         browser.executeScript({ code: "document.cookie;" }).then(cookie => {
-          console.log("Cookie: ", cookie);
+          console.log("Cookie: ", cookie+" \nCode: "+event.code);
           this.error += cookie;
         });
       });
@@ -137,7 +138,7 @@ export class HomePage {
   }
 
   async about() {
-    const alert = await this.alertController.create({
+    const alert = this.alertController.create({
       title: this.enums.About.ABOUT_TITLE+' ['+this.enums.About.ABOUT_VERSION+']',
       message: this.enums.About.ABOUT_MESSAGE,
       buttons: [this.enums.ElementsText.TEXT_CLOSE_BUTTON]
