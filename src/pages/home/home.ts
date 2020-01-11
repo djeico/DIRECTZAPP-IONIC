@@ -47,6 +47,11 @@ export class HomePage {
     setTimeout(() => { this.inputDDD.setFocus(); }, 1000);
   }
 
+  
+  ionViewWillEnter(){
+    this.navCtrl.goToRoot;
+  }
+
   setFocusTel() {
     this.inputTel.setFocus();
   }

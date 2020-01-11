@@ -6,7 +6,7 @@ tasks:
             npm update node-sass &&
             npm install @ionic/app-scripts@latest --save-dev &&
             npm i natives &&
-            ionic serve
+            ionic serve --external
   - init: npm run build
 
 vscode:
