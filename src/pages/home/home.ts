@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, ViewController, Platform, AlertController, Select } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, AlertController, Select } from 'ionic-angular';
 import { Validators, FormBuilder } from '@angular/forms';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { HomeRules } from '../../rules/home';
 import { BandeiraRepository } from '../../repository/bandeira';
 import { BandeiraModel } from '../../model/bandeira';
 import * as Enums from '../../enumerable/enumerables';
+import { AboutPage } from '../about/about';
 
 @IonicPage()
 @Component({
@@ -18,7 +18,6 @@ export class HomePage {
   @ViewChild('_tel') inputTel;
   @ViewChild('_ddd') inputDDD;
 
-  public platform = null;
   public bandeiras: Array<BandeiraModel>;
   public model: BandeiraModel = new BandeiraModel("Brasil", "+55", "BR");
   public selectOptions;
@@ -28,13 +27,11 @@ export class HomePage {
 
   public ddd = null;
   public numero = null;
-  public error = null;
 
-  constructor(public alertController: AlertController, private iaBrowser: InAppBrowser, platform: Platform, public navCtrl: NavController, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
+  constructor(public alertController: AlertController, public navCtrl: NavController, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
 
     this.bandeiras = BandeiraRepository.getBandeiras() as Array<BandeiraModel>;
     this.selectOptions = { cssClass: "course-popover" };
-    this.platform = platform;
 
     this.destinatarioForm = this.formBuilder.group({
       ddd: [this.ddd, Validators.compose([Validators.maxLength(2), Validators.minLength(2), Validators.required])],
@@ -47,17 +44,11 @@ export class HomePage {
     setTimeout(() => { this.inputDDD.setFocus(); }, 1000);
   }
 
-  
-  ionViewWillEnter(){
-    this.navCtrl.goToRoot;
-  }
-
-  setFocusTel() {
-    this.inputTel.setFocus();
-  }
-
-  setFocusDDD() {
-    this.inputDDD.setFocus();
+  onChangeDDI($event) {
+    let indices = this.bandeiras.map(function (obj, index) {
+      if (obj.code == $event) { return index; }
+    }).filter(isFinite)
+    this.model = this.bandeiras[indices[0]];
   }
 
   onChangeDDD(event) {
@@ -81,53 +72,23 @@ export class HomePage {
     }
   }
 
-  goShareOne(data) {
-    let fone = encodeURI(`${data.ddi}${data.ddd}${data.numero}`);
-    let _TARGET = "_system"; //openWithSystemBrowser [ANDROID OK]
-    //let _TARGET = "_blank"; //openWithInAppBrowser
-    //let _TARGET = "_self"; //openWithCordovaBrowser
-
-    try {
-      let text = encodeURI('');
-      let url = `https://wa.me/${fone}?text=${text}`; /* outra forma de mmontar a url: `whatsapp://send?text=t`; */
-
-      const browser = this.iaBrowser.create(url, _TARGET, {
-        location: "no",
-        clearcache: "yes",
-        clearsessioncache: "yes",
-        toolbar: "no"
-      });
-
-      browser.on("loadstop").subscribe(event => {
-        browser.executeScript({ code: "document.cookie;" }).then(cookie => {
-          console.log("Cookie: ", cookie+" \nCode: "+event.code);
-          this.error += cookie;
-        });
-      });
-
-    } catch (error) {
-      console.log("goShare Error: ", error);
-      this.error += error;
-      this.navCtrl.setRoot(this.navCtrl.getActive().component);
-    }
+  setFocusTel() {
+    this.inputTel.setFocus();
   }
 
-  onChangeDDI($event) {
-    let indices = this.bandeiras.map(function (obj, index) {
-      if (obj.code == $event) { return index; }
-    }).filter(isFinite)
-    this.model = this.bandeiras[indices[0]];
+  setFocusDDD() {
+    this.inputDDD.setFocus();
   }
 
   openSelect() {
     this.selectRef.open();
   }
 
-  dismiss() {
+  goMessage() {
     let telefone = null;
     try {
       telefone = { ddi: this.model.dial_code.replace('+', ''), ddd: this.ddd, numero: this.numero };
-      this.goShareOne(telefone);
+      this.about(telefone);
     } catch (error) {
       telefone = null;
     }
@@ -138,17 +99,8 @@ export class HomePage {
     setTimeout(() => { this.inputDDD.setFocus(); }, 500);
   }
 
-  exitApp() {
-    this.platform.exitApp();
-  }
-
-  async about() {
-    const alert = this.alertController.create({
-      title: this.enums.About.ABOUT_TITLE+' ['+this.enums.About.ABOUT_VERSION+']',
-      message: this.enums.About.ABOUT_MESSAGE,
-      buttons: [this.enums.ElementsText.TEXT_CLOSE_BUTTON]
-    });
-    await alert.present();
+  async about(data) {
+    this.navCtrl.setRoot(AboutPage, {data});
   }
 
 }

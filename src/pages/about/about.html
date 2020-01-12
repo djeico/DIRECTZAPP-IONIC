@@ -1,0 +1,73 @@
+<ion-header no-border>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button icon-only color="royal" (click)="voltar()">
+          <ion-icon name="arrow-back"></ion-icon>
+          Voltar
+        </button>
+      </ion-buttons>
+
+      <ion-title>{{enums.About.ABOUT_TITLE}}</ion-title>
+
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+
+    <ion-card class="elevation">
+      <img src="../../assets/imgs/avatar/avatar.JPG"/>
+    </ion-card>    
+
+  <ion-list no-lines>
+    <div class="tanks">
+      <ion-note> {{enums.About.ABOUT_TANKS}} </ion-note>
+    </div>
+    <ion-item >
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="code-working"></ion-icon>
+            <div>Desenvolvido por:</div>
+          </button>
+        </ion-col>
+        <ion-col align-self-center class="contact">
+          <ion-note> Jaquisson Nunes </ion-note>
+        </ion-col>
+      </ion-row>
+
+      <ion-row (click)="sendMail()">
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="mail"></ion-icon>
+            <div>E-mail:</div>
+          </button>
+        </ion-col>
+        <ion-col align-self-center class="contact">
+          <ion-note> {{enums.About.ABOUT_EMAIL}} </ion-note>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="information-circle"></ion-icon>
+            <div>Versão atual:</div>
+          </button>
+        </ion-col>
+
+        <ion-col align-self-center class="contact">
+          <ion-note> {{enums.About.ABOUT_VERSION}} </ion-note>
+        </ion-col>
+      </ion-row>
+      
+      
+
+
+      
+    </ion-item>
+
+  </ion-list>  
+
+  
+
+</ion-content>
