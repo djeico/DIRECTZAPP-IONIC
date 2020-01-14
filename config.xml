@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.jaquisson.directzapp" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.jaquisson.directzapp" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>DirectZapp</name>
     <description>Converse no Whatsapp com números que não estão em sua agenda!</description>
     <author email="suportedev.jn@gmail.com" href="https://plus.google.com/u/2/116881077812415274554">Jaquisson Nunes</author>
