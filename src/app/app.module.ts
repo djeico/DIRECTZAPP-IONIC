@@ -5,7 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { InAppBrowser } from '../../node_modules/@ionic-native/in-app-browser';
-import { TestePageModule } from '../pages/home/home.module';
+import { HomePageModule } from '../pages/home/home.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { TestePageModule } from '../pages/home/home.module';
   ],
   imports: [
     BrowserModule,
-    TestePageModule,
+    HomePageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

@@ -8,66 +8,41 @@
       </ion-buttons>
 
       <ion-title>{{enums.About.ABOUT_TITLE}}</ion-title>
-
+      
+      <ion-buttons right>
+        <ion-note > {{enums.About.ABOUT_VERSION}} </ion-note>
+      </ion-buttons>
+      
     </ion-navbar>
   </ion-header>
 
-  <ion-content>
-
-    <ion-card class="elevation">
-      <img src="../../assets/imgs/avatar/avatar.JPG"/>
-    </ion-card>    
-
-  <ion-list no-lines>
-    <div class="tanks">
-      <ion-note> {{enums.About.ABOUT_TANKS}} </ion-note>
+<ion-content fullscreen="true" slot="fixed" >
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="../../assets/imgs/avatar/avatar.JPG" alt="">
+      </div>
     </div>
-    <ion-item >
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="code-working"></ion-icon>
-            <div>Desenvolvido por:</div>
-          </button>
-        </ion-col>
-        <ion-col align-self-center class="contact">
-          <ion-note> Jaquisson Nunes </ion-note>
-        </ion-col>
-      </ion-row>
+    <div class="card-body">
+      <div class="user-meta ion-text-center">
+        <h3 class="playername">Jaquisson Nunes</h3>
+        <h5 class="country">Desenvolvedor de Software</h5>
+        <h6 class="ranking">{{enums.About.ABOUT_TANKS}} </h6>
+      </div>
 
-      <ion-row (click)="sendMail()">
-        <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="mail"></ion-icon>
-            <div>E-mail:</div>
-          </button>
-        </ion-col>
-        <ion-col align-self-center class="contact">
-          <ion-note> {{enums.About.ABOUT_EMAIL}} </ion-note>
-        </ion-col>
-      </ion-row>
+      <button class="button" ion-button full color="primary" icon-start (click)="sendMail()">
+        <ion-icon name="mail" align-self-center></ion-icon>
+        {{enums.About.ABOUT_EMAIL}}
+      </button>
+      <button class="button" ion-button full color="primary" icon-start (click)="goGitHub()">
+        <ion-icon name="logo-github" align-self-center></ion-icon>
+        djeico
+      </button>
+      <button class="button" ion-button full color="primary" icon-start (click)="goLinkedin()">
+        <ion-icon name="logo-linkedin" align-self-center></ion-icon>
+        jaquisson-nunes
+      </button>
 
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="information-circle"></ion-icon>
-            <div>Versão atual:</div>
-          </button>
-        </ion-col>
-
-        <ion-col align-self-center class="contact">
-          <ion-note> {{enums.About.ABOUT_VERSION}} </ion-note>
-        </ion-col>
-      </ion-row>
-      
-      
-
-
-      
-    </ion-item>
-
-  </ion-list>  
-
-  
-
+    </div>
+  </div>
 </ion-content>

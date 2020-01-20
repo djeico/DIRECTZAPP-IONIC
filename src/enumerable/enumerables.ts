@@ -6,7 +6,7 @@ export enum ValidationEnum{
 }
 
 export enum About{
-  ABOUT_VERSION = 'v.1.0.5',
+  ABOUT_VERSION = 'v.1.0.7',
   ABOUT_TITLE = 'DirectZapp',
   ABOUT_EMAIL = 'suportedev.jn@gmail.com',
   ABOUT_TANKS = 'Obrigado por utilizar o DirectZapp!',

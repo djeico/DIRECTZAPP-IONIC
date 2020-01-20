@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { HomePage } from './home';
-import { PopoverPageModule } from '../popover/popover.module';
+import { PopoverPage } from './popover';
 import { AboutPageModule } from '../about/about.module';
 
 @NgModule({
   declarations: [
-    HomePage
+    PopoverPage,
   ],
   imports: [
-    IonicPageModule.forChild(HomePage),
-    PopoverPageModule,
+    IonicPageModule.forChild(PopoverPage),
     AboutPageModule
   ],
 })
-export class HomePageModule {}
+export class PopoverPageModule {}

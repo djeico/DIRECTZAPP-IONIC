@@ -1,5 +1,17 @@
 page-home {
-
+    ion-header {
+        .toolbar {
+          position: absolute;
+      
+          .toolbar-background {
+            background: transparent;
+          }
+          .toolbar-title {
+            color: black;
+          }
+        }
+    }
+    
     ion-content {
         background-image: url('../../assets/imgs/bg.jpg');
         -webkit-background-image: url('../../assets/imgs/bg.jpg');
@@ -9,13 +21,13 @@ page-home {
         text-shadow: 0.5px 0.5px 0.5px #000;
     }
 
+    ion-item {
+        background-color: transparent !important;
+    }
+
     form {
         background-color: transparent !important;
         margin-top: 15px !important;
-    }
-
-    ion-item {
-        background-color: transparent !important;
     }
 
     .form-error {
@@ -50,6 +62,9 @@ page-home {
     .input {
         border-bottom: 1px solid transparent !important;
     }
-  
+    .fab-button{
+        margin-top: 60px !important;
+        margin-right: -10px !important;
+    } 
 
 }

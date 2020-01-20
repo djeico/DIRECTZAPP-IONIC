@@ -1,3 +1,14 @@
+<ion-header no-border>
+    <ion-navbar hideBackButton>
+      <ion-buttons right class="fab-button">
+		<ion-fab right bottom>
+			<button (click)="about(null)" ion-fab color="warning" mini><ion-icon ios="ios-bulb" md="md-bulb"></ion-icon></button>
+		</ion-fab>		
+	  </ion-buttons>
+
+    </ion-navbar>
+  </ion-header>
+
 <ion-content padding>
 
 	<form [formGroup]="destinatarioForm">
@@ -26,8 +37,7 @@
 		</ion-item>
 		<ion-item no-lines class="divider">
 			<div *ngIf="!regras.isValidoDDD(destinatarioForm) && ddd != null" class="form-error"> {{enums.ValidationEnum.DDD_WARNING}} </div>
-		</ion-item>
-		
+		</ion-item>		
 
 		<ion-item (click)="setFocusTel()" class="item">
 			<ion-label stacked class="text" >TELEFONE</ion-label>
@@ -39,7 +49,6 @@
 			<div *ngIf="!regras.isValidoNumero(destinatarioForm) && numero != null" class="form-error"> {{enums.ValidationEnum.FONE_WARNING}}</div>
 		</ion-item>
 
-
 		<button (click)="goMessage()" class="btn" ion-button color="primary" #add full ion-button icon-start [disabled]="!destinatarioForm.valid">
       		<ion-icon class="icon" ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon> {{enums.ElementsText.TEXT_TALK_BUTTON}}
     	</button>
@@ -50,9 +59,4 @@
 
 	</form>
 
-
-	
 </ion-content>
-<ion-fab right bottom>
-	<button (click)="about(null)" ion-fab color="warning" mini><ion-icon ios="ios-bulb" md="md-bulb"></ion-icon></button>
-</ion-fab>
