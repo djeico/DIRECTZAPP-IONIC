@@ -1,7 +1,4 @@
 # DIRECTZAPP-IONIC
-<snippet>
-  <content><![CDATA[
-# ${1:Project Name}
 
 Já pensou que sempre que precisa conversar com alguém no WhatsApp você precisa cadastrar o número na sua agenda telefônica?
 Pode ficar tranquilo! Agora você pode falar com qualquer número que possua WhatsApp cadastrado sem precisar adicioná-lo à sua agenda.
@@ -57,7 +54,3 @@ Se for utilizar, ou replicar este código, não esqueça de citar que achou ele 
 ## Liceça
 Aproveite cmo e daforma que quiser! É totalmente grátis!!!
 O importante é compartilhar o conhecimento, este sim não tem preço!
-
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
