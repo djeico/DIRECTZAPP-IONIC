@@ -8,7 +8,7 @@
 importScripts('./build/sw-toolbox.js');
 
 self.toolbox.options.cache = {
-  name: 'directZapp-v1.0.7'
+  name: 'directZapp-v1.0.8'
 };
 
 // pre-cache our key assets

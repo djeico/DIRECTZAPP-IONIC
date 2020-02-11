@@ -7,6 +7,7 @@ tasks:
             npm install @ionic/app-scripts@latest --save-dev &&
             npm i natives &&
             npm install --save @angular/material @angular/cdk @angular/animations &&
+            npm install -g firebase-tools@6.1 a &&
             ionic serve --external
   - init: npm run build
 

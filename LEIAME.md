@@ -1,5 +1,5 @@
 *##############################################################################################
-Firebase Deploy:
+Firebase Deploy proccess:
 	npm run build
 	firebase deploy	
 

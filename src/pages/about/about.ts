@@ -13,7 +13,7 @@ export class AboutPage {
 
   public enums = Enums;
   private _ANDROID_APPLINK = 'https://play.google.com/store/apps/details?id=br.com.jaquisson.directzapp';
-  private _PWA_APPLINK = 'https://directzapp.firebaseapp.com/';
+  private _PWA_APPLINK = 'https://directzapp.web.app/';
 
   constructor(private navCtrl: NavController, private platform: Platform, private iab: InAppBrowser) { }
 
