@@ -3,21 +3,28 @@
       <ion-buttons left>
         <button ion-button icon-only color="royal" (click)="voltar()">
           <ion-icon name="arrow-back"></ion-icon>
-          Voltar
         </button>
       </ion-buttons>
 
       <ion-title>{{enums.About.ABOUT_TITLE}}</ion-title>
-      
+
       <ion-buttons right>
         <ion-note > {{enums.About.ABOUT_VERSION}} </ion-note>
       </ion-buttons>
-      
+
     </ion-navbar>
   </ion-header>
 
 <ion-content fullscreen="true" slot="fixed" >
   <div class="card">
+  <ion-content>
+    <ion-fab top right center>
+      <button ion-fab color="warning" (click)="goShareApp()">
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-fab>
+  </ion-content>
+
     <div class="header">
       <div class="avatar">
         <img src="../../assets/imgs/avatar/avatar.JPG" alt="">

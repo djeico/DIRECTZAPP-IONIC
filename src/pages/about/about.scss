@@ -4,11 +4,11 @@ page-about {
         position: relative;
         height: 100%;
         width: 100%;
-    
+
         text-align: center;
         font-family: 'Courier New', Courier, monospace;
-        word-wrap: break-word;    
-    
+        word-wrap: break-word;
+
         .button {
             margin-top: 1em;
             margin-bottom: 1em
@@ -21,19 +21,19 @@ page-about {
         align-self: center !important;
         align-items: center !important;
     }
-    
+
     .card {
         margin: 0 auto;
-    
+
         .header {
             height: 200px; // 20vh;
-    
+
             .avatar {
                 width: 160px; //40vw
                 height: 160px;
                 position: relative;
                 margin: 0 auto;
-    
+
                 img {
                     display: block;
                     border-radius: 50%;
@@ -45,22 +45,22 @@ page-about {
             }
         }
     }
-    
+
     .card-body {
         background-color: #ffffff;
         padding: 30px;
         height: calc(100vh - (200px + 56px));
         overflow: hidden;
-    
+
         .user-meta {
             padding-top: 40px;
-    
+
             .playername {
                 font-size: 24px;
                 font-weight: 600;
                 color: #303940;
             }
-    
+
             .country {
                 font-size: 90%;
                 color: #949ea6;
@@ -68,6 +68,10 @@ page-about {
                 margin: 0 auto;
             }
         }
+    }
+    ion-fab {
+      padding-left: 95px !important;
+      padding-top: 75px !important;
     }
 
 }
