@@ -8,6 +8,8 @@ tasks:
             npm i natives &&
             npm install --save @angular/material @angular/cdk @angular/animations &&
             npm install -g firebase-tools@6.1 a &&
+            ionic cordova plugin add cordova-plugin-x-socialsharing &&
+            npm install --save @ionic-native/social-sharing@4 &&
             ionic serve --external
   - init: npm run build
 
