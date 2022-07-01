@@ -52,5 +52,5 @@ Desenvolvido por Jaquisson Nunes.
 Se for utilizar, ou replicar este código, não esqueça de citar que achou ele aqui... ;)
 
 ## Liceça
-Aproveite cmo e daforma que quiser! É totalmente grátis!!!
+Aproveite como e da forma que quiser! É totalmente grátis!!!
 O importante é compartilhar o conhecimento, este sim não tem preço!
